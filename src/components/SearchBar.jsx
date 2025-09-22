@@ -1,14 +1,18 @@
+import "./styles/SearchBar.css";
+
 import { useState } from "react";
 import { Search as SearchIcon } from "lucide-react";
+import PropTypes from 'prop-types';
 
-export const SearchBar = () => {
+
+export const SearchBar = ({onTickerSelect}) => {
     console.log(import.meta.env.VITE_PYTHON_SERVICES_URL);
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const API_BASE = import.meta.env.VITE_PYTHON_SERVICES_URL || 'http://localhost:8000';
+    const API_BASE = import.meta.env.VITE_PYTHON_SERVICES_URL;
 
 
     const fetchMarkets = async (input) => {
@@ -24,7 +28,7 @@ export const SearchBar = () => {
 
             // API call to fetch markets list from Alpaca
             const params = new URLSearchParams({ query: trimmed, limit: "10" });
-            const res = await fetch(`${API_BASE}/alpaca/fetch_markets?${params.toString()}`);
+            const res = await fetch(`${API_BASE}/tickers/search?${params.toString()}`);
 
             // Check if the req is successful
             if (!res.ok) {
@@ -33,8 +37,6 @@ export const SearchBar = () => {
 
             // Parse data
             const data = await res.json();
-
-            console.log(data);
 
             // Set results
             setResults(Array.isArray(data.results) ? data.results : []);
@@ -54,6 +56,16 @@ export const SearchBar = () => {
         fetchMarkets(input);
     };
 
+
+    const handleTickerClick = (ticker) => {
+        setResults([]);
+        setInput("");
+        
+        if (onTickerSelect) {
+            onTickerSelect(ticker);
+        }
+    };
+
     return (
         <div className="input-wrapper">
             <SearchIcon id="search-icon" size={16} />
@@ -64,11 +76,15 @@ export const SearchBar = () => {
             />
             {loading && <div className="search-loading">Loading...</div>}
             {error && <div className="search-error">{error}</div>}
+
+
             {results.length > 0 && (
                 <ul className="search-results">
                     {results.map((r) => (
-                        <li key={`${r.ticker}-${r.exchange}`}>
-                            {r.ticker} - {r.name} ({r.exchange})
+                        <li key={`${r.ticker}-${r.exchange}`}
+                            onClick={() => handleTickerClick(r.ticker)}
+                            className="search-result-item">
+                            {r.ticker} - {r.company_name} ({r.exchange})
                         </li>
                     ))}
                 </ul>
@@ -76,3 +92,8 @@ export const SearchBar = () => {
         </div>
     )
 }
+
+// Check that onTickerSelect is type function and required
+SearchBar.propTypes = {
+  onTickerSelect: PropTypes.func.isRequired,
+};
