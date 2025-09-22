@@ -10,7 +10,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     async function onSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); // Event interface tells the user agent that the event is being explicitly handled, so its default action, such as page scrolling, link navigation, or pasting text, should not be taken.
         try {
             const res = await fetch(BACKEND_URL + "/api/auth/login", {
                 method: "POST",
@@ -18,6 +18,15 @@ export default function Login() {
                 body: JSON.stringify({ username, password: pass })
             });
             if (!res.ok) { throw new Error() }
+
+            const { token, refreshToken } = await res.json();
+        
+            localStorage.setItem('authToken', token);
+            if (refreshToken) {
+                localStorage.setItem('refreshToken', refreshToken);
+            }
+
+
             navigate("/home");
         } 
         catch { alert("Login failed"); }
