@@ -1,4 +1,4 @@
-import './styles/Home.css';
+import './styles/home.css';
 import { useState } from 'react';
 import { SearchBar } from '../components/SearchBar';
 import { TickerModal } from '../components/TickerModal';
@@ -22,7 +22,7 @@ function Home() {
   return (
     <div className="home">
       <h1>Home Page</h1>
-      <p>Welcome to the home page!</p>
+      <p>Welcome to the aaasd page!</p>
       <SearchBar onTickerSelect={handleTickerSelect} />
       <TickerModal ticker={selectedTicker} isOpen={isModalOpen} onClose={closeModal}/>
     </div>

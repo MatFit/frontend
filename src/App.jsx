@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useState } from 'react'
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Layout from './pages/Layout';
-import Register from './pages/Register';
-import './App.css'
+import Home from './pages/home';
+import Login from './pages/login';
+import Layout from './pages/layout';
+import Register from './pages/register';
+
+import { TickerModal } from './components/TickerModal';
 import { SearchBar } from './components/SearchBar';
+
+import './App.css'
 
 
 function App() {
@@ -16,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/test" element={<TickerModal />} />
       </Routes>
     </BrowserRouter>
   )
