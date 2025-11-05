@@ -1,7 +1,6 @@
 import "./styles/SearchBar.css";
-
 import { useState } from "react";
-import { Search as SearchIcon } from "lucide-react";
+import { Search as SearchIcon, X } from "lucide-react";
 import PropTypes from 'prop-types';
 
 
@@ -14,10 +13,9 @@ export const SearchBar = ({onTickerSelect}) => {
 
     const API_BASE = import.meta.env.VITE_PYTHON_SERVICES_URL;
 
-
     const fetchMarkets = async (input) => {
+        // Trim input
         const trimmed = input.trim();
-
         if (!trimmed) {
             setResults([]);
             return;
@@ -34,7 +32,6 @@ export const SearchBar = ({onTickerSelect}) => {
             if (!res.ok) {
                 throw new Error(`Request failed: ${res.status}`);
             }
-
             // Parse data
             const data = await res.json();
 
@@ -49,14 +46,22 @@ export const SearchBar = ({onTickerSelect}) => {
         finally {
             setLoading(false);
         }
-        };
+    };
 
-        const handleChange = (input) => {
+    // Handle when user types in input
+    const handleChange = (input) => {
         setInput(input);
         fetchMarkets(input);
     };
 
+    // Handle clear input
+    const handleClear = () => {
+        setInput("");
+        setResults([]);
+        setError("");
+    };
 
+    // Handle when ticker is clicked
     const handleTickerClick = (ticker) => {
         setResults([]);
         setInput("");
@@ -67,33 +72,57 @@ export const SearchBar = ({onTickerSelect}) => {
     };
 
     return (
-        <div className="input-wrapper">
-            <SearchIcon id="search-icon" size={16} />
-            <input
-                placeholder="Find your market..."
-                value={input}
-                onChange={(e) => handleChange(e.target.value)}
-            />
-            {loading && <div className="search-loading">Loading...</div>}
-            {error && <div className="search-error">{error}</div>}
-
-
+        <div className="search-bar-container">
+            <div className="search-input-wrapper">
+                <SearchIcon className="search-icon" size={20} />
+                <input
+                    className="search-input"
+                    placeholder="Search for stocks..."
+                    value={input}
+                    onChange={(e) => handleChange(e.target.value)}
+                />
+                {input && (
+                    <button 
+                        className="clear-button" 
+                        onClick={handleClear}
+                        aria-label="Clear search"
+                    >
+                        <X size={18} />
+                    </button>
+                )}
+            </div>
+            {/* If loading invoke this div element */}
+            {loading && (
+                <div className="search-status loading">
+                    <div className="loading-spinner"></div>
+                    Searching...
+                </div>
+            )}
+        
+            {/* When results aren't empty*/}
             {results.length > 0 && (
-                <ul className="search-results">
-                    {results.map((r) => (
-                        <li key={`${r.ticker}-${r.exchange}`}
-                            onClick={() => handleTickerClick(r.ticker)}
-                            className="search-result-item">
-                            {r.ticker} - {r.company_name} ({r.exchange})
-                        </li>
-                    ))}
-                </ul>
+                <div className="search-results-container">
+                    <ul className="search-results">
+                        {results.map((r) => (
+                            <li 
+                                key={`${r.ticker}-${r.exchange}`}
+                                onClick={() => handleTickerClick(r.ticker)}
+                                className="search-result-item"
+                            >
+                                <div className="result-ticker">{r.ticker}</div>
+                                <div className="result-details">
+                                    <span className="result-name">{r.company_name}</span>
+                                    <span className="result-exchange">{r.exchange}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             )}
         </div>
     )
 }
 
-// Check that onTickerSelect is type function and required
 SearchBar.propTypes = {
   onTickerSelect: PropTypes.func.isRequired,
 };

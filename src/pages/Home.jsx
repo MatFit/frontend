@@ -2,7 +2,9 @@ import './styles/home.css';
 import { useState } from 'react';
 import { SearchBar } from '../components/SearchBar';
 import { TickerModal } from '../components/TickerModal';
-
+import { MenuBar } from '../components/MenuBar';
+import { Footer } from '../components/Footer';
+import { SettingsBar } from '../components/SettingsBar';
 
 function Home() {
   const [selectedTicker, setSelectedTicker] = useState(null);
@@ -21,10 +23,19 @@ function Home() {
 
   return (
     <div className="home">
-      <h1>Home Page</h1>
-      <p>Welcome to the aaasd page!</p>
-      <SearchBar onTickerSelect={handleTickerSelect} />
-      <TickerModal ticker={selectedTicker} isOpen={isModalOpen} onClose={closeModal}/>
+      <nav className="top-nav">
+        <MenuBar />
+        <h1 className="nav-title">AfterMath</h1>
+        <SettingsBar />
+      </nav>
+
+      <div className="main-content">
+        <h2 className='search-bar-title'>Follow and quiz your knowledge on the markets in your watchlist!</h2>
+        <SearchBar onTickerSelect={handleTickerSelect} />
+        <TickerModal ticker={selectedTicker} isOpen={isModalOpen} onClose={closeModal}/>
+      </div>
+
+      <Footer />
     </div>
   );
 }

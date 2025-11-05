@@ -52,17 +52,27 @@ export default function Register() {
     // When register form is submitted
     async function onSubmit(e) {
         e.preventDefault();
+
         try {
-            const res = await fetch(BACKEND_URL + "/api/auth/signup", {
+            const res = await fetch(BACKEND_URL + "/api/user/create", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password: pass, email }),
             });
 
             if (!res.ok) {
-                throw new Error("HTTP " + res.status);
+                throw new Error("HTTP " + res.status + "asd");
             }
             
+            console.log("res:", await res.clone().json());
+            const { authToken, refreshToken } = await res.json();
+        
+            localStorage.setItem("registeredUser", username);
+            localStorage.setItem('loginUserAuthToken', authToken);
+            if (refreshToken) {
+                localStorage.setItem('refreshToken', refreshToken);
+            }
+
             navigate("/login");
         } 
         catch (err) {

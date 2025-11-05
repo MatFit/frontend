@@ -1,0 +1,99 @@
+/* === Stock Carousel Container === */
+.stock-carousel-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* === Header === */
+.stock-carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.stock-carousel-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.3px;
+}
+
+.stock-carousel-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.stock-carousel-button {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease-in-out;
+}
+
+.stock-carousel-button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.stock-carousel-list {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 16px;
+  padding: 8px 0;
+  scrollbar-width: none;
+}
+
+.stock-carousel-list::-webkit-scrollbar {
+  display: none;
+}
+
+.stock-card {
+  flex: 0 0 150px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 8px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stock-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stock-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.stock-card-status {
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.mini-stock-chart {
+  width: 100%;
+  height: 60px;
+}
+
+.stock-carousel-list::after {
+  content: "";
+  flex: 0 0 16px;
+}

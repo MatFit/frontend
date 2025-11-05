@@ -19,11 +19,12 @@ export default function Login() {
             });
             if (!res.ok) { throw new Error() }
 
-            const { token, refreshToken } = await res.json();
+            console.log("res:", await res.clone().json());
+            const { authToken, refreshToken } = await res.json();
         
-            localStorage.setItem('authToken', token);
+            localStorage.setItem('loginUserAuthToken', authToken);
             if (refreshToken) {
-                localStorage.setItem('refreshToken', refreshToken);
+                localStorage.setItem('loginUserRefreshToken', refreshToken);
             }
 
 
