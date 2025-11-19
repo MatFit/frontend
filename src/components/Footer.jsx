@@ -26,9 +26,8 @@ export function Footer() {
           <h4 className="footer-heading">Connect</h4>
           <ul className="footer-links">
             <li><a href="/contact">Contact Us</a></li>
-            <li><a href="https://twitter.com">Twitter</a></li>
-            <li><a href="https://github.com">GitHub</a></li>
-            <li><a href="https://linkedin.com">LinkedIn</a></li>
+            <li><a href="https://github.com/MatFit">GitHub</a></li>
+            <li><a href="https://linkedin.com/in/mathis-fituwi-892977225">LinkedIn</a></li>
           </ul>
         </div>
       </div>

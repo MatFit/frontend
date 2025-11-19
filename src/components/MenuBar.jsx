@@ -16,8 +16,8 @@ export function MenuBar() {
       {menuOpen && (
         <div className="dropdown-menu left">
           <a href="/" className="dropdown-item">Home</a>
-          <a className="dropdown-item">Watchlist</a>
-          <a className="dropdown-item">Quiz Yourself</a>
+          <a href="/watchlist" className="dropdown-item">Watchlist</a>
+          <a href="/quiz" className="dropdown-item">Quiz Yourself!</a>
           
           <div 
             className="dropdown-item submenu-parent"
@@ -28,9 +28,9 @@ export function MenuBar() {
             
             {historyOpen && (
               <div className="submenu">
-                <a href="/history/trades" className="dropdown-item">Watchlist History</a>
-                <a href="/history/portfolio" className="dropdown-item">Past Quizzes</a>
-                <a href="/history/performance" className="dropdown-item">Performance</a>
+                <a href="/past_quizzes" className="dropdown-item">Past Quizzes</a>
+                <a href="/performance" className="dropdown-item">Performance</a>
+                
               </div>
             )}
           </div>

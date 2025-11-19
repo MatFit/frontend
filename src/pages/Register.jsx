@@ -61,19 +61,20 @@ export default function Register() {
             });
 
             if (!res.ok) {
-                throw new Error("HTTP " + res.status + "asd");
+                throw new Error("HTTP " + res.status);
             }
             
             console.log("res:", await res.clone().json());
-            const { authToken, refreshToken } = await res.json();
+            const { jwtToken, refreshToken } = await res.json();
         
             localStorage.setItem("registeredUser", username);
-            localStorage.setItem('loginUserAuthToken', authToken);
+            localStorage.setItem('loginUserJWTToken', jwtToken);
+
             if (refreshToken) {
-                localStorage.setItem('refreshToken', refreshToken);
+              localStorage.setItem('refreshToken', refreshToken);
             }
 
-            navigate("/login");
+            navigate("/");
         } 
         catch (err) {
             if (err.message.startsWith("HTTP")) alert(`Registration failed: ${err.message}`);

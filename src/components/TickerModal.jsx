@@ -1,7 +1,8 @@
 import './styles/TickerModal.css';
 
 import React from 'react';
-import { X } from "lucide-react";
+
+import { X, Plus} from "lucide-react";
 import PropTypes from 'prop-types';
 
 export const TickerModal = ({ ticker, isOpen, onClose }) => {
@@ -78,6 +79,19 @@ export const TickerModal = ({ ticker, isOpen, onClose }) => {
             More company data and analytics will be displayed here...
           </div>
         </div>
+
+        {/* <div className="watchlist-button-section">
+            <button onClick={onClose} className="modal-add-watchlist-button" title="Add to Watchlist">
+              <Plus size={24} />
+            </button>
+        </div> */}
+        <div class="button-container">
+          <Plus className="hover-button" size={24} />
+          <div class="content-box">
+            <p>Add to your watchlist</p>
+          </div>
+        </div>
+
       </div>
     </div>
   );

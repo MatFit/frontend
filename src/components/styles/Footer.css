@@ -2,16 +2,22 @@
   background-color: #f8f9fa;
   border-top: 1px solid #e0e0e0;
   margin-top: 80px;
-  padding: 48px 20px 24px;
+  padding: 48px 0 24px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px 32px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
-  padding-bottom: 32px;
 }
 
 .footer-section {
@@ -64,7 +70,7 @@
 .footer-bottom {
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 24px;
+  padding: 24px 20px 0;
   border-top: 1px solid #e0e0e0;
   text-align: center;
 }

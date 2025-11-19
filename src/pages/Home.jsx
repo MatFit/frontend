@@ -5,6 +5,7 @@ import { TickerModal } from '../components/TickerModal';
 import { MenuBar } from '../components/MenuBar';
 import { Footer } from '../components/Footer';
 import { SettingsBar } from '../components/SettingsBar';
+import { StockCarousel } from '../components/StockChart';
 
 function Home() {
   const [selectedTicker, setSelectedTicker] = useState(null);
@@ -32,6 +33,7 @@ function Home() {
       <div className="main-content">
         <h2 className='search-bar-title'>Follow and quiz your knowledge on the markets in your watchlist!</h2>
         <SearchBar onTickerSelect={handleTickerSelect} />
+        <StockCarousel></StockCarousel>
         <TickerModal ticker={selectedTicker} isOpen={isModalOpen} onClose={closeModal}/>
       </div>
 

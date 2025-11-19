@@ -144,3 +144,71 @@
   border-radius: 8px;
   color: #475569;
 }
+
+.button-container {
+  position: relative; /* Essential for positioning the content box */
+  display: inline-block; /* Ensures the container only takes up necessary space */
+}
+
+.hover-button {
+  margin-top: 24px;
+  padding: 10px 20px;
+  background-color: #18d43b;
+  border-radius: 8px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.hover-button:hover {
+  background-color: #62bf68;
+  transform: scale(1.02);
+}
+.hover-button:active{
+  background-color: #81d290;
+}
+
+
+
+.content-box {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 5px;
+  min-width: 200px;
+  min-height: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.content-box::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-bottom-color: #dee2e6;
+}
+
+.content-box::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-bottom-color: #f8f9fa;
+}
+
+.button-container:hover .content-box {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
